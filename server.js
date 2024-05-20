@@ -26,6 +26,10 @@ app.post('/identify', (req, res) => {
     res.redirect("/granted");
 })
 
+function authenticateToken(req, res, next){
+    console.log("We are in the authentication controll function");
+}
+
 app.get('/granted', (req, res) => {
     res.render("start.ejs");
 })
