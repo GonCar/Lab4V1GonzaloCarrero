@@ -11,9 +11,9 @@ db.serialize(() => {
   )`);
 
   const stmt = db.prepare("INSERT INTO Users VALUES (?, ?, ?, ?)");
-  stmt.run("id1", "student", "Mith", "password");
-  stmt.run("id2", "student", "Kim", "password2");
-  stmt.run("id3", "teacher", "Anna", "password3");
+  stmt.run("id1", "student", "Mith", "pass");
+  stmt.run("id2", "student", "Kim", "pan");
+  stmt.run("id3", "teacher", "Anna", "tr3");
   stmt.run("admin", "admin", "Mat", "admin");
   stmt.finalize();
 });
