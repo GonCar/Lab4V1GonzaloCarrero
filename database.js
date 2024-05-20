@@ -11,10 +11,10 @@ db.serialize(() => {
   )`);
 
   const stmt = db.prepare("INSERT INTO Users VALUES (?, ?, ?, ?)");
-  stmt.run("id1", "student", "user1", "password");
-  stmt.run("id2", "student", "user2", "password2");
-  stmt.run("id3", "teacher", "user3", "password3");
-  stmt.run("admin", "admin", "admin", "admin");
+  stmt.run("id1", "student", "Mith", "password");
+  stmt.run("id2", "student", "Kim", "password2");
+  stmt.run("id3", "teacher", "Anna", "password3");
+  stmt.run("admin", "admin", "Mat", "admin");
   stmt.finalize();
 });
 
