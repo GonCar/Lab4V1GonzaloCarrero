@@ -27,7 +27,13 @@ app.post('/identify', (req, res) => {
 })
 
 function authenticateToken(req, res, next){
-    console.log("We are in the authentication controll function");
+    if(currentKey == ""){
+        res.redirect("/identify");
+    }else if(jwt.verify(currentKey, SECRET_KEY)){
+        next();
+    }else{
+        res.redirect('/identify');
+    }
 }
 
 app.get('/granted', (req, res) => {
