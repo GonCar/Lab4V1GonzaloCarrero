@@ -18,13 +18,22 @@ app.get('/', (req, res) =>{
 });
 
 app.post('/identify', (req, res) => {
-    //authenticate
-    const username = req.body.password;
-    const token = jwt.sign(username, SECRET_KEY);
-    currentKey = token;
-    currentPassword = username;
-    res.redirect("/granted");
-})
+    const username = req.body.username;
+    const password = req.body.password;
+  
+    db.get("SELECT * FROM Users WHERE name = ? AND password = ?", [username, password], (err, user) => {
+      if (err) {
+        return res.status(500).send('Internal Server Error');
+      }
+      if (!user) {
+        return res.redirect('/identify');
+      }
+  
+      const token = jwt.sign({ userID: user.userID, role: user.role }, SECRET_KEY, { expiresIn: '1h' });
+      res.cookie('token', token, { httpOnly: true });
+      res.redirect('/granted');
+    });
+  });
 
 function authenticateToken(req, res, next){
     if(currentKey == ""){
